@@ -1,113 +1,103 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="theme-color" content="#008000">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta charset="UTF-8">
-<title>Ceiling Fan</title>
 
-<link rel="manifest" href="manifest.json">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
+    margin: 0;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.fan-container {
-    margin-top: 60px;
+/* Fan image */
+
+#fan {
+    width: 90vw;   /* very big fan */
+    max-width: 420px;
+    transform-origin: center center;
 }
 
-.fan {
-    width: 200px;
-    height: 200px;
-    margin: auto;
-    border-radius: 50%;
-    position: relative;
-}
-
-.blade {
-    width: 20px;
-    height: 100px;
-    background: black;
-    position: absolute;
-    left: 90px;
-    top: 0;
-    border-radius: 10px;
-}
-
-.blade:nth-child(1) {
-    transform: rotate(0deg);
-}
-
-.blade:nth-child(2) {
-    transform: rotate(120deg);
-}
-
-.blade:nth-child(3) {
-    transform: rotate(240deg);
-}
+/* Spin animation */
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+
+from { transform: rotate(0deg); }
+
+to { transform: rotate(360deg); }
+
 }
 
 .spin {
-    animation: spin 0.5s linear infinite;
+    animation: spin 0.35s linear infinite;
 }
 
+/* Button */
+
 button {
-    margin-top: 40px;
-    padding: 15px 30px;
-    font-size: 18px;
-    background: green;
-    color: white;
-    border: none;
-    border-radius: 8px;
+
+position: absolute;
+
+bottom: 40px;
+
+padding: 15px 35px;
+
+font-size: 18px;
+
+background: green;
+
+color: white;
+
+border: none;
+
+border-radius: 10px;
+
 }
+
 </style>
 
 </head>
 
 <body>
 
-<h1>Ceiling Fan</h1>
-
-<div class="fan-container">
-    <div id="fan" class="fan">
-        <div class="blade"></div>
-        <div class="blade"></div>
-        <div class="blade"></div>
-    </div>
-</div>
+<img id="fan" src="fan.png">
 
 <button onclick="toggleFan()">ON / OFF</button>
 
 <script>
 
-let fanRunning = false;
+let running = false;
 
 function toggleFan() {
-    const fan = document.getElementById("fan");
 
-    if (fanRunning) {
-        fan.classList.remove("spin");
-        fanRunning = false;
-    } else {
-        fan.classList.add("spin");
-        fanRunning = true;
-    }
+let fan = document.getElementById("fan");
+
+if (running) {
+
+fan.classList.remove("spin");
+
+running = false;
+
 }
 
-/* Service Worker Registration */
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
+else {
+
+fan.classList.add("spin");
+
+running = true;
+
+}
+
 }
 
 </script>
 
 </body>
+
 </html>
